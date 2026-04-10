@@ -1,0 +1,146 @@
+// Version: 1.0.0
+type AiRecommendation__1030226573 =
+  {mangaDexId : Text; matchScore : Float; reason : Text; title : Text};
+type BotCommand__146554011 =
+  {
+    command : Text;
+    id : Nat;
+    response : Text;
+    timestamp : Int;
+    userId : Principal
+  };
+type ContentType__478751240 = {#comics; #manga; #manhwa};
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type List__415060402<T> = List__790383201<T>;
+type List__790383201<T> =
+  {
+    var blockIndex : Nat__490723111;
+    var blocks : [var [var ?T]];
+    var elementIndex : Nat__490723111
+  };
+type MangaMeta__636662304 =
+  {
+    artist : Text;
+    author : Text;
+    contentType : ContentType__478751240;
+    coverImageUrl : Text;
+    description : Text;
+    genres : [Text];
+    lastFetched : Int;
+    mangaDexId : Text;
+    rating : Float;
+    status : Text;
+    title : Text
+  };
+type MangaSearchResult__228745314 =
+  {
+    artist : Text;
+    author : Text;
+    contentType : ContentType__478751240;
+    coverImageUrl : Text;
+    description : Text;
+    genres : [Text];
+    mangaDexId : Text;
+    rating : Float;
+    status : Text;
+    title : Text
+  };
+type MessageDirection__15657503 = {#inbound; #outbound};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type NotificationFrequency__435315768 = {#daily; #immediate; #weekly};
+type NotificationPrefs__78568124 =
+  {
+    enabled : Bool;
+    frequency : NotificationFrequency__435315768;
+    webhookUrl : Text;
+    whatsappNumber : Text
+  };
+type ReadingStatus__293889067 = {#completed; #dropped; #planToRead; #reading};
+type RecommendationProfile__122565047 =
+  {
+    lastRecommendedAt : Int;
+    pastRecommendations : [Text];
+    preferredGenres : [Text];
+    readingPatternNotes : Text
+  };
+type UserId__158757552 = Principal;
+type WatchlistEntry__982543860 =
+  {
+    addedAt : Int;
+    chaptersRead : Nat;
+    contentType : ContentType__478751240;
+    lastKnownChapter : Float;
+    mangaDexId : Text;
+    readingStatus : ReadingStatus__293889067;
+    title : Text;
+    updatedAt : Int
+  };
+type WhatsAppMessage__65571199 =
+  {
+    body : Text;
+    direction : MessageDirection__15657503;
+    from : Text;
+    id : Text;
+    timestamp : Int;
+    to : Text
+  };
+actor {
+  stable botLog :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?BotCommand__146554011]];
+      var elementIndex : Nat__490723111
+    };
+  stable metaCache :
+    {
+      var root : Node__46230540<Text, MangaMeta__636662304>;
+      var size : Nat__490723111
+    };
+  stable var nextBotCommandId : Nat;
+  stable var nextWhatsAppMsgId : Nat;
+  stable notifPrefs :
+    {
+      var root :
+        Node__46230540<UserId__158757552, NotificationPrefs__78568124>;
+      var size : Nat__490723111
+    };
+  stable recCache :
+    {
+      var root :
+        Node__46230540<UserId__158757552, [AiRecommendation__1030226573]>;
+      var size : Nat__490723111
+    };
+  stable recProfiles :
+    {
+      var root :
+        Node__46230540<UserId__158757552, RecommendationProfile__122565047>;
+      var size : Nat__490723111
+    };
+  stable searchCache :
+    {
+      var root : Node__46230540<Text, [MangaSearchResult__228745314]>;
+      var size : Nat__490723111
+    };
+  stable twilioConfig :
+    {var accountSid : Text; var authToken : Text; var sandboxNumber : Text};
+  stable watchlists :
+    {
+      var root :
+        Node__46230540<UserId__158757552,
+                        List__415060402<WatchlistEntry__982543860>>;
+      var size : Nat__490723111
+    };
+  stable whatsappChatHistory :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?WhatsAppMessage__65571199]];
+      var elementIndex : Nat__490723111
+    }
+};

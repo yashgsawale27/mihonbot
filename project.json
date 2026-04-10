@@ -1,0 +1,23 @@
+{
+  "overview": "MihonBot is a manga/manhwa/comics companion dashboard with a live WhatsApp bot powered by Twilio. Users can manage their watchlist, track chapters, browse trending titles, and get AI recommendations — all from the web or directly via WhatsApp commands and free-form questions.",
+  "features": [
+    "WhatsApp bot via Twilio Sandbox — chat with commands or free-form questions",
+    "Commands: /watchlist, /recommend, /trending with emoji-formatted replies",
+    "Free-form AI answers powered by the recommendations agent",
+    "Chat history log in the bot commands dashboard",
+    "Twilio signature validation for secure webhook processing",
+    "Watchlist management, chapter tracking, and Discover page"
+  ],
+  "category": "entertainment",
+  "tags": [
+    "manga",
+    "manhwa",
+    "comics",
+    "whatsapp-bot",
+    "twilio",
+    "watchlist",
+    "ai-recommendations",
+    "chapter-tracking"
+  ],
+  "last_updated": "2026-04-10T14:22:41.094Z"
+}
